@@ -2,11 +2,10 @@
 
 require_once("config.php");
 
-$sql = new sql();
+$root = new usuario();
 
+$root->loadById(3);
 
-$usuario = $sql->select("SELECT * FROM cliente");
-
-print_r($usuario);
+echo $root;
 
 ?>
