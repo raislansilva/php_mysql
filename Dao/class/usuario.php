@@ -43,19 +43,42 @@
   	 public function loadById($id){
   	 	$sql = new sql();
 
-  	 	$results = $sql->select("SELECT *FROM cliente where id =:id",array(
+  	 	$results = $sql->select("SELECT *FROM usuarios where id =:id",array(
             ":id"=>$id
   	 	));
 
   	 	if(count($results)>0){
-  	 		$row = $results[0];
-
-  	 		$this->setId($row['id']);
-  	 		$this->setNomeCliente($row['nomeCliente']);
-  	 		$this->setCpfCliente($row['cpfCliente']);
-  	 		$this->setEnderecoCliente($row['enderecoCliente']);
+  	 	   $this->setData($result[0]);
   	 	}
-  	 }
+	   }
+	   
+	   public static function getList(){
+		   $sql = new sql();
+
+		   return $sql->select("SELECT * FROM usuarios ORDER BY nomeCliente");
+	
+	   }
+
+	   public function setData($data){
+			$this->setId($data['id']);
+			$this->setNomeCliente($data['nomeCliente']);
+			$this->setCpfCliente($data['cpfCliente']);
+			$this->setEnderecoCliente($data['enderecoCliente']);
+	   }
+
+	   public function insert(){
+		   $sql =  new sql();
+
+		  $results = $sql->select("CALL usuarios_insert(:nomeCliente,:cpfCliente,enderecoCliente)", array(
+			  ':nomeCliente'=>$this->getNomeCliente(),
+			  ':cpfCliente' =>$this->getCpfCliente(),
+			  ':enderecoCliente'=>$this->getEnderecoCliente()
+		  ));
+
+		  if(count($results)>0){
+			$this->setData($results[0]);
+		 }
+	 }
 
   	 public function __toString(){
   	 	return json_encode(array(

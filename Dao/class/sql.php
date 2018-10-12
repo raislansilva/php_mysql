@@ -5,16 +5,18 @@ class sql extends PDO{
 	private $con;
 
 	public  function __construct(){
-		$this->con = new PDO("mysql:host=localhost;dbname=crud_prodater","root",""); 
+		$this->con = new PDO("mysql:host=localhost;dbname=dao","root",""); 
 	}
 
 	private function setParams($statement,$parameters = array()){
 		foreach ($parameters as $key => $value) {
+
 			$this->setParam($statement,$key, $value);
 		}
 	}
 
 	private function setParam($statement,$key,$value){
+
 		$statement->bindParam($key,$value);
 	}
 
@@ -22,11 +24,11 @@ class sql extends PDO{
 		$stmt = $this->con->prepare($rawQuery);
 		$this->setParams($stmt,$params);
 		$stmt->execute();
-		return  $stmt;
+		return $stmt;
 
 	}
 
-	public function select($rawQuery, $params = array()){
+	public function select($rawQuery, $params = array()):array{
 		$stmt = $this->query($rawQuery,$params);
 
 		return $stmt->fetchAll(PDO::FETCH_ASSOC);
