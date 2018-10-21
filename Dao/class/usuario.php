@@ -80,6 +80,34 @@
 		 }
 	 }
 
+	 public function update($nomeCliente, $cpfCliente, $enderecoCliente){
+		 
+		 $this->setNomeCliente($nomeCliente);
+		 $this->setCpfCliente($cpfCliente);
+		 $this->setEnderecoCliente($enderecoCliente); 
+
+		 $sql = new sql();
+		 $sql->query("UPDATE usuarios set nomeCliente = :NOMECLIENTE, cpfCliente = :CPFCLIENTE, enderecoCliente = :ENDERECOCLIENTE where id = :ID", array(
+			':NOMECLIENTE'=>$this->getNomeCliente(),
+			':CPFCLIENTE' =>$this->getCpfCliente(),
+			':ENDERECOCLIENTE'=>$this->getEnderecoCliente(), 
+			':ID'=>$this->getId()
+		 ));
+	 }
+
+	 public function delete(){
+		 $sql = new sql();
+
+		 $sql->query("DELETE FROM usuarios WHERE id = :ID", array(
+           ':ID' => $this->getId()
+		 ));
+
+		 $this->setId(null);
+		 $this->setNomeCliente(null);
+		 $this->setCpfCliente(null);
+		 $this->setEnderecoCliente(null);
+	 }
+
   	 public function __toString(){
   	 	return json_encode(array(
           "id"=>$this->getId(),
