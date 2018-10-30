@@ -16,16 +16,36 @@ $dompdf = new DOMPDF();
 /* Carrega seu HTML */
 $dompdf->load_html('
 
-  <p style="font-size:13px; font-weight: bold;">Assinatura do Solictante:_________________________________________________________________________________</p>
+<style>
 
-  <p style="font-size:13px; font-weight: bold;">Data Fechamento:_______________________________________________________________________________________</p>
+td, th {
+    text-align: left;
+    padding: 9px;
+}
+</style>
 
-  <form style="font-size:13px; font-weight: bold;" action="/action_page.php">
+
+ <table style="width: 100%; margin-left:-8px;">
+    <tr>
+        <th style="font-size:10px; font-weight: bold; width:60% ">Assinatura do Solictante:</th>
+        <th style="font-size:10px; font-weight: bold;width:30%;">Data do Fechamento:</th>
+    </tr>
+    <tr>
+       <td><div style="width:100%;height:1px;background:black "></div></td>
+       <td><div style="width:104%;height:1px;background:black "></div></td>
+    </tr>
+
+ </table>
+
+
+  <hr style="color:white; width:0.5px;"> 
+
+  <form style="font-size:10px; font-weight: bold;" action="/action_page.php">
       <label>Autorizo fechar o chamado:</label>
-      <input style="width: 14px;" type="checkbox" name="vehicle1" value="Bike"> sim
-      <input style="width: 14px;" type="checkbox" name="vehicle2" value="Car"> não porque?<labe>___________________________________________________________</label>
+      <input style="width: 11px;" type="checkbox" name="vehicle1" value="Bike"> sim
+      <input style="width: 11px;" type="checkbox" name="vehicle2" value="Car"> não porque?
       <hr style="color:white; width:0.5px;"> 
-      <label>_______________________________________________________________________________________________________ </label>
+      <div style="width:100%;height:1px;background:black "></div>
   </form>
 
 ');
